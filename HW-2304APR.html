@@ -321,9 +321,14 @@
 
           console.log(selectedQuestion)
 
-          const quizQuestionArrayEntry = quizQuestionArray[x]
+            if (quizQuestionArray.indexOf(selectedQuestion) === -1 ) {
+              quizQuestionArray.push(selectedQuestion)
+            } else {
+              newRand = randNum
 
-          quizQuestionArrayEntry.push(selectedQuestion)
+            }
+
+          
           
           //get question using rndnum
         }
