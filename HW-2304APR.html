@@ -304,14 +304,38 @@
 
       // create array of random question gen to choose 10 questions
 
-      const questionGenerator = function questionArray() {
-        for (let x = 0; x<10; x++){
-          const randNum = Math.floor(Math.random() * ((questionStore.length)-1) + 1 )
+
+      
+      
+      function questionArray(quizQuestionArray) {
+        
+        
+          for (let x = 0; x<10; x++){
+          const quizQuestionArray = [];
+        
+          const randNum = Math.floor(Math.random() * ((questionStore.length)-1) + 1 ) //need to make number unique
+          
           console.log(randNum)
 
+          const selectedQuestion = questionStore[randNum]
+
+          console.log(selectedQuestion)
+
+          const quizQuestionArrayEntry = quizQuestionArray[x]
+
+          quizQuestionArrayEntry.push(selectedQuestion)
+          
+          //get question using rndnum
         }
         
       }
+
+      const popQ = questionArray()
+      console.log(quizQuestionArray)
+
+      
+
+
 
       // choose question from array to display question in each question box
 
