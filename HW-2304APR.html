@@ -317,16 +317,24 @@
           
           console.log(randNum)
 
-          const selectedQuestion = questionStore[randNum]
+          let selectedQuestion = questionStore[randNum]
 
           console.log(selectedQuestion)
 
-            if (quizQuestionArray.indexOf(selectedQuestion) === -1 ) {
-              quizQuestionArray.push(selectedQuestion)
-            } else {
-              newRand = randNum
+          let sameQuestionCheck = quizQuestionArray.indexOf(selectedQuestion)
 
+            if (sameQuestionCheck === -1){
+              let newRand = randNum
+              selectedQuestion = questionStore[newRand]
+            } else { 
+              
             }
+
+            quizQuestionArray.push(selectedQuestion)
+
+          
+
+
 
           
           
