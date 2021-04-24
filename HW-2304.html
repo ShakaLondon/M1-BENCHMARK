@@ -306,31 +306,50 @@
 
 
       
-      
-      function questionArray(quizQuestionArray) {
+      const quizQuestionArray = [];
+
+      function questionArray() {
         
         
           for (let x = 0; x<10; x++){
-          const quizQuestionArray = [];
-        
-          const randNum = Math.floor(Math.random() * ((questionStore.length)-1) + 1 ) //need to make number unique
-          
-          console.log(randNum)
 
-          let selectedQuestion = questionStore[randNum]
+          let randNum_index;
+            
+            while (!randNum_index){
+              let randNum = Math.floor(Math.random() * questionStore.length);
+              if (!quizQuestionArray.filter((d) => questionStore[randNum] == d).length)
 
-          console.log(selectedQuestion)
+              randNum_index = randNum;
 
-          let sameQuestionCheck = quizQuestionArray.indexOf(selectedQuestion)
-
-            if (sameQuestionCheck === -1){
-              let newRand = randNum
-              selectedQuestion = questionStore[newRand]
-            } else { 
-              
             }
 
-            quizQuestionArray.push(selectedQuestion)
+            quizQuestionArray.push(questionStore[randNum_index]);
+        
+          //  //need to make number unique
+          
+          // console.log(randNum)
+
+          // let selectedQuestion = questionStore[randNum]
+
+          
+
+          // let sameQuestionCheck = quizQuestionArray.indexOf(selectedQuestion)
+
+          // console.log(sameQuestionCheck)
+          
+          // let newRand = Math.floor(Math.random() * ((questionStore.length)-1) + 1 )
+
+          // if (sameQuestionCheck > -1){
+            
+          //   selectedQuestion = questionStore[newRand]
+
+          // }
+          
+          // console.log(selectedQuestion)
+
+
+
+          // quizQuestionArray.push(selectedQuestion)
 
           
 
@@ -338,7 +357,7 @@
 
           
           
-          //get question using rndnum
+          // //get question using rndnum
         }
         
       }
