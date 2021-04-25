@@ -96,18 +96,18 @@
       <table>
         <tr>
           <td>
-            <button id="question1" class=questionOptions type="button">Question Answer One</button>
+            <button id="question1" class="questionOptions" type="button">Question Answer One</button>
           </td>
           <td>
-            <button id="question2" class=questionOptions type="button">Question Answer Two</button>
+            <button id="question2" class="questionOptions" type="button">Question Answer Two</button>
           </td>
         </tr>
-        <tr>
-          <td>
-            <button id="question3" class=questionOptions type="button">Question Answer Three</button>
+        <tr id="hiddenOptions">
+          <td>"
+            <button id="question3" class="questionOptions" type="button">Question Answer Three</button>
           </td>
           <td>
-            <button id="question4" class=questionOptions type="button">Question Answer Four</button>
+            <button id="question4" class="questionOptions" type="button">Question Answer Four</button>
           </td>
         </tr>
       </table>
@@ -369,38 +369,47 @@
 
       }
 
+      
+
       const questionTitleInput = addQuestion()
 
-      function addAnswers() {
+      let answerArray
+      function addAnswers(answerArray) {
 
         const rightAns = quizQuestionArray[0].correct_answer
 
         const incorrectAns = quizQuestionArray[0].incorrect_answers
 
-        let answerArray = rightAns.concat(incorrectAns)
+        answerArray = rightAns.concat(incorrectAns)
+        console.log(answerArray)
+
+
+        for (let z = answerArray.length - 1; z > 0; z--) {
+        let rand = Math.floor(Math.random() * (z + 1)); // random index from 0 to i
+        [answerArray[z], answerArray[rand]] = [answerArray[rand], answerArray[z]];
+          }
+
+          console.log(answerArray)
 
         const eachAnswerOption = document.getElementsByClassName('questionOptions') // array of question boxes
 
-        console.log(answerArray)
+        for (let k=0; k < answerArray.length; k++){
+          eachAnswerOption[k].innerHTML = answerArray[k]
+        }
 
-// question selected question property
+        let booleanOrNot = quizQuestionArray[0].type
 
-      }
+        if (booleanOrNot === "boolean") {
+          let unUsed = document.getElementById("hiddenOptions")
 
-      const questionBoxInput = addAnswers ()
-      
-      function shuffle(answerArray) {
-        answerArray => answerArray
-          .map(a => [Math.random(), a])
-          .sort((a, b) => a[0] - b[0])
-          .map(a => a[1]);
-        
-        
-      }
+              unUsed.style.visibility = "hidden";
+          }
+        }
+        // question selected question property
 
       
 
-      console.log(shuffle(answerArray))
+      const questionBoxInput = addAnswers()
 
 
 
@@ -414,6 +423,7 @@
 
 
       window.onload = function () {
+        
         //IF YOU ARE DISPLAYING ALL THE QUESTIONS TOGETHER:
         //HINT: for each question, create a container with the "question"
         //create a radio button https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio with, as option the both the correct answer and the incorrect answers
