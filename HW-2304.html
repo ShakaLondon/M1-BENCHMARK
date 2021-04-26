@@ -59,7 +59,15 @@
         text-shadow: 1px 1px 1px rgba(182, 73, 245, 0.336);
         background-color: rgb(137, 106, 209);
         height: 100px;
-        width: 400px;
+        width: 450px;
+        margin: auto;
+      }
+
+      .questionOptions #selected {
+        color:rgb(137, 106, 209);
+        background-color: rgb(255, 255, 255);
+        border-width: 2px;
+
       }
 
       #submit {
@@ -96,18 +104,18 @@
       <table>
         <tr>
           <td>
-            <button id="question1" class="questionOptions" type="button">Question Answer One</button>
+            <button id="question1" class="questionOptions" type="button">Question Answer One <input type="radio" name="questionOption" class="hidden" value="answerArray[0].value"></button>
           </td>
           <td>
-            <button id="question2" class="questionOptions" type="button">Question Answer Two</button>
+            <button id="question2" class="questionOptions" type="button">Question Answer Two <input type="radio" name="questionOption" class="hidden" value="answerArray[1].value"></button>
           </td>
         </tr>
         <tr id="hiddenOptions">
-          <td>"
-            <button id="question3" class="questionOptions" type="button">Question Answer Three</button>
+          <td>
+            <button id="question3" class="questionOptions" type="button">Question Answer Three <input type="radio" name="questionOption" class="hidden" value="answerArray[2].value"></button>
           </td>
           <td>
-            <button id="question4" class="questionOptions" type="button">Question Answer Four</button>
+            <button id="question4" class="questionOptions" type="button">Question Answer Four <input type="radio" name="questionOption" class="hidden" value="answerArray[3].value"></button>
           </td>
         </tr>
       </table>
@@ -115,6 +123,8 @@
 
     <br/>
     <br/>
+
+    <input type="hidden" id="questionValue" value="" />
 
     <div id="submitAnswer">
       <button id="submit" type="button">Next Question</button>
@@ -374,6 +384,7 @@
       const questionTitleInput = addQuestion()
 
       let answerArray
+
       function addAnswers(answerArray) {
 
         const rightAns = quizQuestionArray[0].correct_answer
@@ -410,6 +421,29 @@
       
 
       const questionBoxInput = addAnswers()
+
+// on click add class selected and execute function 
+
+      let chosenAnswerArray
+      let button = document.querySelector(".selected")
+      
+      function selectedOption (button){
+        for (h=0; h<eachAnswerOption.length; h++) 
+        let chosenAnswer = button.innerHTML
+        chosenAnswerArray.push(chosenAnswer)
+
+      }
+
+
+
+
+
+
+
+
+
+
+       // to store answers selected array 
 
 
 
