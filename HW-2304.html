@@ -104,18 +104,18 @@
       <table>
         <tr>
           <td>
-            <button id="question1" class="questionOptions" type="button">Question Answer One <input type="radio" name="questionOption" class="hidden" value="answerArray[0].value"></button>
+            <button id="question1" class="questionOptions" type="button" onClick="toggleSelected('question1')">Question Answer One </button>
           </td>
           <td>
-            <button id="question2" class="questionOptions" type="button">Question Answer Two <input type="radio" name="questionOption" class="hidden" value="answerArray[1].value"></button>
+            <button id="question2" class="questionOptions" type="button" onClick="toggleSelected('question2')">Question Answer Two </button>
           </td>
         </tr>
         <tr id="hiddenOptions">
           <td>
-            <button id="question3" class="questionOptions" type="button">Question Answer Three <input type="radio" name="questionOption" class="hidden" value="answerArray[2].value"></button>
+            <button id="question3" class="questionOptions" type="button" onClick="toggleSelected('question3')">Question Answer Three </button>
           </td>
           <td>
-            <button id="question4" class="questionOptions" type="button">Question Answer Four <input type="radio" name="questionOption" class="hidden" value="answerArray[3].value"></button>
+            <button id="question4" class="questionOptions" type="button" onClick="toggleSelected('question4')">Question Answer Four </button>
           </td>
         </tr>
       </table>
@@ -385,11 +385,10 @@
 
       let answerArray
 
+      const rightAns = quizQuestionArray[0].correct_answer
+      const incorrectAns = quizQuestionArray[0].incorrect_answers
+
       function addAnswers(answerArray) {
-
-        const rightAns = quizQuestionArray[0].correct_answer
-
-        const incorrectAns = quizQuestionArray[0].incorrect_answers
 
         answerArray = rightAns.concat(incorrectAns)
         console.log(answerArray)
@@ -413,8 +412,9 @@
         if (booleanOrNot === "boolean") {
           let unUsed = document.getElementById("hiddenOptions")
 
-              unUsed.style.visibility = "hidden";
+              unUsed.style.visibility = "collapse";
           }
+
         }
         // question selected question property
 
@@ -422,18 +422,89 @@
 
       const questionBoxInput = addAnswers()
 
-// on click add class selected and execute function 
+      console.log("right answer:", rightAns)
 
-      let chosenAnswerArray
-      let button = document.querySelector(".selected")
-      
-      function selectedOption (button){
-        for (h=0; h<eachAnswerOption.length; h++) 
-        let chosenAnswer = button.innerHTML
-        chosenAnswerArray.push(chosenAnswer)
+// function removes all selected from class and adds selected to selected option
+
+
+      let chosenButton 
+
+      function toggleSelected (eventID, chosenButton){
+        let allButtons = document.getElementsByClassName("questionOptions")
+
+        for (let o = 0; o < allButtons.length; o++){
+          let selectedCheck = allButtons[o]
+          selectedCheck.classList.remove('selected')
+        }
+
+        chosenButton = document.getElementById(eventID)
+
+        chosenButton.classList.toggle('selected')
+
+        console.log(chosenButton)
+
+        return chosenButton
 
       }
 
+// when clicked carry out toggle selected, 
+
+//write function to select same function and use its value
+
+// use selected class to identify object
+
+//add event listener to selected object
+
+// use this to get inner html and assign it to a value]
+
+// compare value
+
+      const answerforSubmit = chosenButton
+
+      console.log(answerforSubmit)
+
+      answerforSubmit.addEventListener()
+
+      const submitB = document.getElementById("submit")
+
+      submitB.addEventListener ('click', answerCheck())
+
+      console.log(answerforSubmit)
+
+
+
+      let chosenAnswerScore = []
+      
+      function answerCheck (chosenButton){
+        const correctAnswer = rightAns[0]
+        console.log(chosenButton)
+        console.log(correctAnswer)
+
+        
+
+        let buttonSelected = chosenButton.innerHTML
+        console.log(buttonSelected)
+        
+        let string = buttonSelected.toString()
+
+        if (chosenButton.innerHTML === rightAns) {
+          chosenAnswerScore.push("1")
+        } else {
+          chosenAnswerScore.push("0")
+        }
+
+      }
+
+      console.log(chosenAnswerScore)
+
+
+// TOGGLE NEW CLASS selected
+
+// IF CLASS IS SELECTED GET VALUE FROM SELECETED Element
+
+// IF VALUE IS EQUAL TO TRUE ELEMENT FIRST ELEMENT OF concat
+
+// IF EQUAL TO FIRST VALUE OF CONCAT ADD ONE POINT TO SCORE
 
 
 
