@@ -63,7 +63,8 @@
         margin: auto;
       }
 
-      .questionOptions #selected {
+      .selected {
+        border: solid;
         color:rgb(137, 106, 209);
         background-color: rgb(255, 255, 255);
         border-width: 2px;
@@ -78,6 +79,22 @@
         background-color: rgb(255, 255, 255);
         height: 50px;
         width: 200px;
+
+      }
+
+      .rightAnswerSubmit{
+        border: solid;
+        color:rgb(255, 255, 255);
+        background-color: rgba(8, 252, 41, 0.829);
+        border-width: 2px;
+
+      }
+
+      .wrongAnswerSubmit{
+        border: solid;
+        color:rgb(255, 255, 255);
+        background-color: rgb(253, 7, 7);
+        border-width: 2px;
 
       }
 
@@ -104,18 +121,18 @@
       <table>
         <tr>
           <td>
-            <button id="question1" class="questionOptions" type="button" onClick="toggleSelected('question1')">Question Answer One </button>
+            <button id="question1" class="questionOptions" type="button">Question Answer One </button>
           </td>
           <td>
-            <button id="question2" class="questionOptions" type="button" onClick="toggleSelected('question2')">Question Answer Two </button>
+            <button id="question2" class="questionOptions" type="button" >Question Answer Two </button>
           </td>
         </tr>
         <tr id="hiddenOptions">
           <td>
-            <button id="question3" class="questionOptions" type="button" onClick="toggleSelected('question3')">Question Answer Three </button>
+            <button id="question3" class="questionOptions" type="button" >Question Answer Three </button>
           </td>
           <td>
-            <button id="question4" class="questionOptions" type="button" onClick="toggleSelected('question4')">Question Answer Four </button>
+            <button id="question4" class="questionOptions" type="button" >Question Answer Four </button>
           </td>
         </tr>
       </table>
@@ -124,7 +141,6 @@
     <br/>
     <br/>
 
-    <input type="hidden" id="questionValue" value="" />
 
     <div id="submitAnswer">
       <button id="submit" type="button">Next Question</button>
@@ -313,9 +329,6 @@
       ];
 
       // create array of random question gen to choose 10 questions
-
-
-      
       const quizQuestionArray = [];
 
       function questionArray() {
@@ -378,10 +391,10 @@
         questionHead.innerHTML = quizQuestionArray[0].question // assigns question text to question module
 
       }
-
       
-
       const questionTitleInput = addQuestion()
+
+      // RANDOMISE ANSWERS FOR EACH QUESTION AND REMOVE BOXES FOR BOOLEAN
 
       let answerArray
 
@@ -424,12 +437,12 @@
 
       console.log("right answer:", rightAns)
 
+
+
+
 // function removes all selected from class and adds selected to selected option
 
-
-      let chosenButton 
-
-      function toggleSelected (eventID, chosenButton){
+      function toggleSelected (eventID){
         let allButtons = document.getElementsByClassName("questionOptions")
 
         for (let o = 0; o < allButtons.length; o++){
@@ -437,7 +450,7 @@
           selectedCheck.classList.remove('selected')
         }
 
-        chosenButton = document.getElementById(eventID)
+        let chosenButton = document.getElementById(eventID)
 
         chosenButton.classList.toggle('selected')
 
@@ -447,7 +460,97 @@
 
       }
 
-// when clicked carry out toggle selected, 
+      
+
+
+
+
+      function giveMeValueOfButton(e, selectedButton){
+           const clickedButton = e.target; // 👈🏻 this is html element that you clicked
+           const value = clickedButton.innerHTML;
+           
+           let selectedValue = value
+           selectedButton = clickedButton// 👈🏻 this is content of that element
+         
+           clickedButton.classList.toggle('selected')
+
+           // remove selected class from others 
+           const allOptionButtons = document.querySelectorAll(".questionOptions")
+           allOptionButtons.forEach(button=>{
+               // remove selected class from all buttons except clicked one
+               if(button.id!==clickedButton.id){ 
+                 button.classList.remove("selected")
+               }
+           })
+           console.log("Clicked answer is ", value)
+
+
+           
+    }   
+
+    // KEEP SCORE AND LOAD NEW QUESTION
+
+
+
+
+
+
+          let chosenAnswerScore = []
+
+          function keepScore(f) {
+            selectedValue = f.HTML
+
+            if(selectedValue === rightAns){
+              chosenAnswerScore.push("1")
+              f.classList.add("rightAnswer")
+
+            } else {
+            chosenAnswerScore.push("0")
+              f.classList.add("wrongAnswer")
+              let y = answerArray.indexOf("selectedValue")
+              answerArray[y].classList.add("rightAnswer")
+
+            } 
+            return chosenAnswerScore
+
+
+
+
+
+            }
+
+
+      
+
+      window.onload = function () {
+          // find all buttons which has questionOptions as class
+        const allOptionButtons = document.querySelectorAll(".questionOptions")
+
+        // forEach button assign  giveMeValueOfButton 👈🏻 this function to onclick 'event'
+        allOptionButtons.forEach(function(button){
+            button.onclick = giveMeValueOfButton // 👈🏻 if its a click event e comes as default as first parameter
+        })
+
+        const submitB = document.querySelector("#submit")
+
+        submitB.onclick = keepScore()
+
+        console.log (chosenAnswerScore)
+      }
+
+      // console.log(selectedValue)
+
+
+// console.log(chosenAnswerScore)
+
+
+
+
+
+
+
+
+// when clicked carry out toggle selected,
 
 //write function to select same function and use its value
 
@@ -459,43 +562,43 @@
 
 // compare value
 
-      const answerforSubmit = chosenButton
+      // const answerforSubmit = chosenButton
 
-      console.log(answerforSubmit)
+      // console.log(answerforSubmit)
 
-      answerforSubmit.addEventListener()
+      // answerforSubmit.addEventListener()
 
-      const submitB = document.getElementById("submit")
+      // const submitB = document.getElementById("submit")
 
-      submitB.addEventListener ('click', answerCheck())
+      // submitB.addEventListener ('click', answerCheck())
 
-      console.log(answerforSubmit)
+      // console.log(answerforSubmit)
 
 
 
-      let chosenAnswerScore = []
+      // let chosenAnswerScore = []
       
-      function answerCheck (chosenButton){
-        const correctAnswer = rightAns[0]
-        console.log(chosenButton)
-        console.log(correctAnswer)
+      // function answerCheck (chosenButton){
+      //   const correctAnswer = rightAns[0]
+      //   console.log(chosenButton)
+      //   console.log(correctAnswer)
 
         
 
-        let buttonSelected = chosenButton.innerHTML
-        console.log(buttonSelected)
+      //   let buttonSelected = chosenButton.innerHTML
+      //   console.log(buttonSelected)
         
-        let string = buttonSelected.toString()
+      //   let string = buttonSelected.toString()
 
-        if (chosenButton.innerHTML === rightAns) {
-          chosenAnswerScore.push("1")
-        } else {
-          chosenAnswerScore.push("0")
-        }
+      //   if (chosenButton.innerHTML === rightAns) {
+      //     chosenAnswerScore.push("1")
+      //   } else {
+      //     chosenAnswerScore.push("0")
+      //   }
 
-      }
+      // }
 
-      console.log(chosenAnswerScore)
+      // console.log(chosenAnswerScore)
 
 
 // TOGGLE NEW CLASS selected
@@ -527,7 +630,7 @@
       // create variable to collect score
 
 
-      window.onload = function () {
+      // window.onload = function () {
         
         //IF YOU ARE DISPLAYING ALL THE QUESTIONS TOGETHER:
         //HINT: for each question, create a container with the "question"
@@ -536,7 +639,7 @@
         //IF YOU ARE DISPLAYING ONE QUESTION AT A TIME
         //Display first question with a title + radio button
         //when the user select the answer, pick the next question and remove this from the page after added in a varible the users' choice.
-      };
+      // };
 
       //HOW TO calculate the result
       //You can do it in 2 ways:
